@@ -269,6 +269,19 @@ namespace LdH
         if (result == a2i_OK) *dst = builder.value;
         return result;
     }
+
+    template<typename digit_t, digit_t base, typename string_t = char const *, class mapping_t = ::LdH::__private::a2i_default_mapping<digit_t, base>>
+    void a2i_skip_digits(string_t begin, string_t end, string_t *pos, mapping_t mapping = mapping_t{}) noexcept
+    {
+        digit_t digit;
+        while (begin < end)
+        {
+            if (mapping.a2i(*begin, &digit)) break;
+            begin++;
+        }
+        *pos = begin;
+        return;
+    }
 }
 
 #endif // LdH_A2I_HPP
