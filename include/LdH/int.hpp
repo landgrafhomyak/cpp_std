@@ -1,6 +1,7 @@
 #ifndef LdH_INT_HPP
 # define LdH_INT_HPP
 
+# include <cstddef>
 # include <cstdint>
 # include <climits>
 
@@ -163,7 +164,7 @@ namespace LdH
     {
         static constexpr bool IS_UNSIGNED = false;
         static constexpr ::LdH::s32 MAX_VALUE = 0x7FFF'FFFFl;
-        static constexpr ::LdH::s32 MIN_VALUE = -0x8000'0000l;
+        static constexpr ::LdH::s32 MIN_VALUE = -0x7FFF'FFFl - 1;
 # ifdef LdH_S32_STRICT
         static constexpr ::LdH::s32 REAL_MAX_VALUE = INT32_MAX;
         static constexpr ::LdH::s32 REAL_MIN_VALUE = INT32_MIN;
