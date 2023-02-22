@@ -292,13 +292,13 @@ namespace LdH
     constexpr ::LdH::size_t packed_size<pack_padding<size>> = size;
 
     template<PackOrder ORDER, typename T, class buffer_t = ::LdH::__private::pack_deault_buffer_t>
-    buffer_t pack1(buffer_t buffer, T value) noexcept(::LdH::_pack1<ORDER, T, buffer_t>::pack(buffer, value))
+    buffer_t pack1(buffer_t buffer, T value) noexcept
     {
         return ::LdH::_pack1<ORDER, T, buffer_t>::pack(buffer, value);
     }
 
     template<PackOrder ORDER, typename T, class buffer_t = ::LdH::__private::pack_deault_buffer_t>
-    buffer_t unpack1(buffer_t buffer, T *storage) noexcept(::LdH::_pack1<ORDER, T, buffer_t>::unpack(buffer, storage))
+    buffer_t unpack1(buffer_t buffer, T *storage) noexcept
     {
         return ::LdH::_pack1<ORDER, T, buffer_t>::unpack(buffer, storage);
     }
