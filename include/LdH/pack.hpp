@@ -110,11 +110,17 @@ namespace LdH
     {
         static constexpr ::LdH::size_t PACKED_SIZE = 1;
 
-        static void pack(buffer_t buffer, ::LdH::s8 value) noexcept
-        { ::LdH::__private::pack_integer<ORDER, ::LdH::u8f, buffer_t, PACKED_SIZE>::pack(buffer, (::LdH::u8f) (::LdH::u8) value); }
+        static buffer_t pack(buffer_t buffer, ::LdH::s8 value) noexcept
+        {
+            ::LdH::__private::pack_integer<ORDER, ::LdH::u8f, buffer_t, PACKED_SIZE>::pack(buffer, (::LdH::u8f) (::LdH::u8) value);
+            return buffer + PACKED_SIZE;
+        }
 
-        static void unpack(buffer_t buffer, ::LdH::s8 *storage) noexcept
-        { *storage = (::LdH::s8) (::LdH::u8) ::LdH::__private::pack_integer<ORDER, ::LdH::u8f, buffer_t, PACKED_SIZE>::unpack(buffer); }
+        static buffer_t unpack(buffer_t buffer, ::LdH::s8 *storage) noexcept
+        {
+            *storage = (::LdH::s8) (::LdH::u8) ::LdH::__private::pack_integer<ORDER, ::LdH::u8f, buffer_t, PACKED_SIZE>::unpack(buffer);
+            return buffer + PACKED_SIZE;
+        }
     };
 
     template<PackOrder ORDER, class buffer_t>
@@ -122,11 +128,17 @@ namespace LdH
     {
         static constexpr ::LdH::size_t PACKED_SIZE = 1;
 
-        static void pack(buffer_t buffer, ::LdH::u8 value) noexcept
-        { ::LdH::__private::pack_integer<ORDER, ::LdH::u8f, buffer_t, PACKED_SIZE>::pack(buffer, (::LdH::u8f) value); }
+        static buffer_t pack(buffer_t buffer, ::LdH::u8 value) noexcept
+        {
+            ::LdH::__private::pack_integer<ORDER, ::LdH::u8f, buffer_t, PACKED_SIZE>::pack(buffer, (::LdH::u8f) value);
+            return buffer + PACKED_SIZE;
+        }
 
-        static void unpack(buffer_t buffer, ::LdH::u8 *storage) noexcept
-        { *storage = (::LdH::u8) ::LdH::__private::pack_integer<ORDER, ::LdH::u8f, buffer_t, PACKED_SIZE>::unpack(buffer); }
+        static buffer_t unpack(buffer_t buffer, ::LdH::u8 *storage) noexcept
+        {
+            *storage = (::LdH::u8) ::LdH::__private::pack_integer<ORDER, ::LdH::u8f, buffer_t, PACKED_SIZE>::unpack(buffer);
+            return buffer + PACKED_SIZE;
+        }
     };
 
     template<PackOrder ORDER, class buffer_t>
@@ -134,11 +146,17 @@ namespace LdH
     {
         static constexpr ::LdH::size_t PACKED_SIZE = 2;
 
-        static void pack(buffer_t buffer, short value) noexcept
-        { ::LdH::__private::pack_integer<ORDER, ::LdH::u16f, buffer_t, PACKED_SIZE>::pack(buffer, (::LdH::u16f) (::LdH::u16) value); }
+        static buffer_t pack(buffer_t buffer, short value) noexcept
+        {
+            ::LdH::__private::pack_integer<ORDER, ::LdH::u16f, buffer_t, PACKED_SIZE>::pack(buffer, (::LdH::u16f) (::LdH::u16) value);
+            return buffer + PACKED_SIZE;
+        }
 
-        static void unpack(buffer_t buffer, ::LdH::s16 *storage) noexcept
-        { *storage = (::LdH::s16) (::LdH::u16) ::LdH::__private::pack_integer<ORDER, ::LdH::u16f, buffer_t, PACKED_SIZE>::unpack(buffer); }
+        static buffer_t unpack(buffer_t buffer, ::LdH::s16 *storage) noexcept
+        {
+            *storage = (::LdH::s16) (::LdH::u16) ::LdH::__private::pack_integer<ORDER, ::LdH::u16f, buffer_t, PACKED_SIZE>::unpack(buffer);
+            return buffer + PACKED_SIZE;
+        }
     };
 
     template<PackOrder ORDER, class buffer_t>
@@ -146,11 +164,17 @@ namespace LdH
     {
         static constexpr ::LdH::size_t PACKED_SIZE = 2;
 
-        static void pack(buffer_t buffer, ::LdH::u16 value) noexcept
-        { ::LdH::__private::pack_integer<ORDER, ::LdH::u16f, buffer_t, PACKED_SIZE>::pack(buffer, (::LdH::u16f) value); }
+        static buffer_t pack(buffer_t buffer, ::LdH::u16 value) noexcept
+        {
+            ::LdH::__private::pack_integer<ORDER, ::LdH::u16f, buffer_t, PACKED_SIZE>::pack(buffer, (::LdH::u16f) value);
+            return buffer + PACKED_SIZE;
+        }
 
-        static void unpack(buffer_t buffer, ::LdH::u16 *storage) noexcept
-        { *storage = (::LdH::u16) ::LdH::__private::pack_integer<ORDER, ::LdH::u16f, buffer_t, PACKED_SIZE>::unpack(buffer); }
+        static buffer_t unpack(buffer_t buffer, ::LdH::u16 *storage) noexcept
+        {
+            *storage = (::LdH::u16) ::LdH::__private::pack_integer<ORDER, ::LdH::u16f, buffer_t, PACKED_SIZE>::unpack(buffer);
+            return buffer + PACKED_SIZE;
+        }
     };
 
     template<PackOrder ORDER, class buffer_t>
@@ -158,11 +182,17 @@ namespace LdH
     {
         static constexpr ::LdH::size_t PACKED_SIZE = 4;
 
-        static void pack(buffer_t buffer, ::LdH::s32 value) noexcept
-        { ::LdH::__private::pack_integer<ORDER, ::LdH::u32f, buffer_t, PACKED_SIZE>::pack(buffer, (::LdH::u32f) (::LdH::u32) value); }
+        static buffer_t pack(buffer_t buffer, ::LdH::s32 value) noexcept
+        {
+            ::LdH::__private::pack_integer<ORDER, ::LdH::u32f, buffer_t, PACKED_SIZE>::pack(buffer, (::LdH::u32f) (::LdH::u32) value);
+            return buffer + PACKED_SIZE;
+        }
 
-        static void unpack(buffer_t buffer, ::LdH::s32 *storage) noexcept
-        { *storage = (::LdH::s32) (::LdH::u32) ::LdH::__private::pack_integer<ORDER, ::LdH::u32f, buffer_t, PACKED_SIZE>::unpack(buffer); }
+        static buffer_t unpack(buffer_t buffer, ::LdH::s32 *storage) noexcept
+        {
+            *storage = (::LdH::s32) (::LdH::u32) ::LdH::__private::pack_integer<ORDER, ::LdH::u32f, buffer_t, PACKED_SIZE>::unpack(buffer);
+            return buffer + PACKED_SIZE;
+        }
     };
 
     template<PackOrder ORDER, class buffer_t>
@@ -170,11 +200,17 @@ namespace LdH
     {
         static constexpr ::LdH::size_t PACKED_SIZE = 4;
 
-        static void pack(buffer_t buffer, ::LdH::u32 value) noexcept
-        { ::LdH::__private::pack_integer<ORDER, ::LdH::u32f, buffer_t, PACKED_SIZE>::pack(buffer, (::LdH::u32f) value); }
+        static buffer_t pack(buffer_t buffer, ::LdH::u32 value) noexcept
+        {
+            ::LdH::__private::pack_integer<ORDER, ::LdH::u32f, buffer_t, PACKED_SIZE>::pack(buffer, (::LdH::u32f) value);
+            return buffer + PACKED_SIZE;
+        }
 
-        static void unpack(buffer_t buffer, ::LdH::u32 *storage) noexcept
-        { *storage = (::LdH::u32) ::LdH::__private::pack_integer<ORDER, ::LdH::u32f, buffer_t, PACKED_SIZE>::unpack(buffer); }
+        static buffer_t unpack(buffer_t buffer, ::LdH::u32 *storage) noexcept
+        {
+            *storage = (::LdH::u32) ::LdH::__private::pack_integer<ORDER, ::LdH::u32f, buffer_t, PACKED_SIZE>::unpack(buffer);
+            return buffer + PACKED_SIZE;
+        }
     };
 
     template<PackOrder ORDER, class buffer_t>
@@ -182,11 +218,17 @@ namespace LdH
     {
         static constexpr ::LdH::size_t PACKED_SIZE = 8;
 
-        static void pack(buffer_t buffer, ::LdH::s64 value) noexcept
-        { ::LdH::__private::pack_integer<ORDER, ::LdH::u64f, buffer_t, PACKED_SIZE>::pack(buffer, (::LdH::u64f) (::LdH::u64) value); }
+        static buffer_t pack(buffer_t buffer, ::LdH::s64 value) noexcept
+        {
+            ::LdH::__private::pack_integer<ORDER, ::LdH::u64f, buffer_t, PACKED_SIZE>::pack(buffer, (::LdH::u64f) (::LdH::u64) value);
+            return buffer + PACKED_SIZE;
+        }
 
-        static void unpack(buffer_t buffer, ::LdH::s64 *storage) noexcept
-        { *storage = (::LdH::s64) (::LdH::u64) ::LdH::__private::pack_integer<ORDER, ::LdH::u64f, buffer_t, PACKED_SIZE>::unpack(buffer); }
+        static buffer_t unpack(buffer_t buffer, ::LdH::s64 *storage) noexcept
+        {
+            *storage = (::LdH::s64) (::LdH::u64) ::LdH::__private::pack_integer<ORDER, ::LdH::u64f, buffer_t, PACKED_SIZE>::unpack(buffer);
+            return buffer + PACKED_SIZE;
+        }
     };
 
     template<PackOrder ORDER, class buffer_t>
@@ -194,11 +236,17 @@ namespace LdH
     {
         static constexpr ::LdH::size_t PACKED_SIZE = 8;
 
-        static void pack(buffer_t buffer, ::LdH::u64 value) noexcept
-        { ::LdH::__private::pack_integer<ORDER, ::LdH::u64f, buffer_t, PACKED_SIZE>::pack(buffer, (::LdH::u64f) value); }
+        static buffer_t pack(buffer_t buffer, ::LdH::u64 value) noexcept
+        {
+            ::LdH::__private::pack_integer<ORDER, ::LdH::u64f, buffer_t, PACKED_SIZE>::pack(buffer, (::LdH::u64f) value);
+            return buffer + PACKED_SIZE;
+        }
 
-        static void unpack(buffer_t buffer, ::LdH::u64 *storage) noexcept
-        { *storage = (::LdH::u64) ::LdH::__private::pack_integer<ORDER, ::LdH::u64f, buffer_t, PACKED_SIZE>::unpack(buffer); }
+        static buffer_t unpack(buffer_t buffer, ::LdH::u64 *storage) noexcept
+        {
+            *storage = (::LdH::u64) ::LdH::__private::pack_integer<ORDER, ::LdH::u64f, buffer_t, PACKED_SIZE>::unpack(buffer);
+            return buffer + PACKED_SIZE;
+        }
     };
 
     template<PackOrder ORDER, ::LdH::size_t SIZE, class buffer_t>
@@ -206,15 +254,18 @@ namespace LdH
     {
         static constexpr ::LdH::size_t PACKED_SIZE = SIZE;
 
-        static void pack(buffer_t buffer, ::LdH::pack_padding<SIZE> value) noexcept
+        static buffer_t pack(buffer_t buffer, ::LdH::pack_padding<SIZE> value) noexcept
         {
             buffer[0] = '\0';
             if constexpr(SIZE > 0)
                 ::LdH::_pack1<ORDER, ::LdH::pack_padding<SIZE - 1>, decltype(buffer + 1)>::pack(buffer + 1, {});
+            return buffer + PACKED_SIZE;
         }
 
-        static void unpack(buffer_t buffer, ::LdH::pack_padding<SIZE> *storage) noexcept
-        {}
+        static buffer_t unpack(buffer_t buffer, ::LdH::pack_padding<SIZE> *storage) noexcept
+        {
+            return buffer + PACKED_SIZE;
+        }
     };
 
     template<PackOrder ORDER, ::LdH::u8 VALUE, class buffer_t>
@@ -222,13 +273,16 @@ namespace LdH
     {
         static constexpr ::LdH::size_t PACKED_SIZE = 1;
 
-        static void pack(buffer_t buffer, ::LdH::pack_const<VALUE> value) noexcept
+        static buffer_t pack(buffer_t buffer, ::LdH::pack_const<VALUE> value) noexcept
         {
             buffer[0] = VALUE;
+            return buffer + 1;
         }
 
-        static void unpack(buffer_t buffer, ::LdH::pack_const<VALUE> *storage) noexcept
-        {}
+        static buffer_t unpack(buffer_t buffer, ::LdH::pack_const<VALUE> *storage) noexcept
+        {
+            return buffer + 1;
+        }
     };
 
     template<typename T>
@@ -238,15 +292,15 @@ namespace LdH
     constexpr ::LdH::size_t packed_size<pack_padding<size>> = size;
 
     template<PackOrder ORDER, typename T, class buffer_t = ::LdH::__private::pack_deault_buffer_t>
-    void pack1(buffer_t buffer, T value) noexcept
+    buffer_t pack1(buffer_t buffer, T value) noexcept(::LdH::_pack1<ORDER, T, buffer_t>::pack(buffer, value))
     {
-        ::LdH::_pack1<ORDER, T, buffer_t>::pack(buffer, value);
+        return ::LdH::_pack1<ORDER, T, buffer_t>::pack(buffer, value);
     }
 
     template<PackOrder ORDER, typename T, class buffer_t = ::LdH::__private::pack_deault_buffer_t>
-    void unpack1(buffer_t buffer, T *storage) noexcept
+    buffer_t unpack1(buffer_t buffer, T *storage) noexcept(::LdH::_pack1<ORDER, T, buffer_t>::unpack(buffer, storage))
     {
-        ::LdH::_pack1<ORDER, T, buffer_t>::unpack(buffer, storage);
+        return ::LdH::_pack1<ORDER, T, buffer_t>::unpack(buffer, storage);
     }
 
     namespace __private
@@ -272,17 +326,22 @@ namespace LdH
         static constexpr ::LdH::size_t PACKED_SIZE = ::LdH::__private::packed_struct_size<A, T...>::SIZE;
 
         template<class buffer_t = ::LdH::__private::pack_deault_buffer_t>
-        static void pack(buffer_t buffer, A first_value, T... other_values) noexcept
+        static buffer_t pack(buffer_t buffer, A first_value, T... other_values) noexcept
         {
-            ::LdH::_pack1<ORDER, A, buffer_t>::pack(buffer, first_value);
-            ::LdH::pack_struct<ORDER, T...>::template pack<decltype(buffer + packed_size<A>)>(buffer + packed_size<A>, other_values...);
+
+            return ::LdH::pack_struct<ORDER, T...>::template pack<decltype(buffer + packed_size<A>)>(
+                    ::LdH::_pack1<ORDER, A, buffer_t>::pack(buffer, first_value),
+                    other_values...
+            );
         }
 
         template<class buffer_t = __private::pack_deault_buffer_t>
-        static void unpack(buffer_t buffer, A *first_storage, T *... other_storages) noexcept
+        static buffer_t unpack(buffer_t buffer, A *first_storage, T *... other_storages) noexcept
         {
-            ::LdH::_pack1<ORDER, A, buffer_t>::unpack(buffer, first_storage);
-            ::LdH::pack_struct<ORDER, T...>::template unpack<decltype(buffer + packed_size<A>)>(buffer + packed_size<A>, other_storages...);
+            return ::LdH::pack_struct<ORDER, T...>::template unpack<decltype(buffer + packed_size<A>)>(
+                    ::LdH::_pack1<ORDER, A, buffer_t>::unpack(buffer, first_storage),
+                    other_storages...
+            );
         }
     };
 
@@ -293,15 +352,15 @@ namespace LdH
         static constexpr ::LdH::size_t PACKED_SIZE = ::LdH::packed_size<A>;
 
         template<class buffer_t = ::LdH::__private::pack_deault_buffer_t>
-        static void pack(buffer_t buffer, A value) noexcept
+        static buffer_t pack(buffer_t buffer, A value) noexcept
         {
-            ::LdH::_pack1<ORDER, A, buffer_t>::pack(buffer, value);
+            return ::LdH::_pack1<ORDER, A, buffer_t>::pack(buffer, value);
         }
 
         template<class buffer_t = __private::pack_deault_buffer_t>
-        static void unpack(buffer_t buffer, A *storage) noexcept
+        static buffer_t unpack(buffer_t buffer, A *storage) noexcept
         {
-            ::LdH::_pack1<ORDER, A, buffer_t>::unpack(buffer, storage);
+            return ::LdH::_pack1<ORDER, A, buffer_t>::unpack(buffer, storage);
         }
     };
 }
