@@ -26,6 +26,9 @@ namespace LdH
         pack_const() noexcept = default;
     };
 
+    template<typename item_type, LdH::size_t size>
+    using pack_array = item_type[size];
+
     template<typename T>
     constexpr bool supports_pack =
             ::LdH::is_same<T, s8> || ::LdH::is_same<T, u8> ||
@@ -280,6 +283,21 @@ namespace LdH
         }
     };
 
+    template<PackOrder ORDER, typename item_t, LdH::size_t size, class buffer_t>
+    struct _pack1<ORDER, item_t[size], buffer_t>
+    {
+    private:
+        static constexpr ::LdH::size_t _NOLOOP_OPTIMIZATION_LIMIT = 64;
+
+    public:
+        static const ::LdH::size_t PACKED_SIZE;
+
+        static buffer_t pack(buffer_t buffer, item_t value[size]) noexcept;
+
+        // double pointer required for compatibility with common interface
+        static buffer_t unpack(buffer_t buffer, item_t *storage[size]) noexcept;
+    };
+
     template<typename T, class buffer_t = char *, PackOrder ORDER = PackOrder_BigEndian>
     constexpr ::LdH::size_t packed_size = ::LdH::_pack1<ORDER, T, buffer_t>::PACKED_SIZE;
 
@@ -298,33 +316,41 @@ namespace LdH
         return ::LdH::_pack1<ORDER, T, buffer_t>::unpack(buffer, storage);
     }
 
-    namespace __private
+
+    template<PackOrder ORDER, typename item_t, LdH::size_t size, class buffer_t>
+    constexpr LdH::size_t  _pack1<ORDER, item_t[size], buffer_t>::PACKED_SIZE = packed_size<item_t, buffer_t, ORDER> * size;
+
+    template<PackOrder ORDER, typename item_t, LdH::size_t size, class buffer_t>
+    buffer_t _pack1<ORDER, item_t[size], buffer_t>::pack(buffer_t buffer, item_t value[size]) noexcept
     {
-        template<typename A, typename ...T>
-        struct packed_struct_size
-        {
-            static constexpr ::LdH::size_t SIZE = ::LdH::packed_size<A> + ::LdH::__private::packed_struct_size<T...>::SIZE;
-        };
+        item_t *p = value;
+        item_t *end = p + size;
+        while (p != end)
+            buffer = pack1<ORDER, item_t, buffer_t>(buffer, *p++);
+        return buffer;
+    }
 
-        template<typename T>
-        struct packed_struct_size<T>
-        {
-            static constexpr ::LdH::size_t SIZE = ::LdH::packed_size<T>;
-        };
-
+    template<PackOrder ORDER, typename item_t, LdH::size_t size, class buffer_t>
+    buffer_t _pack1<ORDER, item_t[size], buffer_t>::unpack(buffer_t buffer, item_t *storage[size]) noexcept
+    {
+        item_t *p = *storage;
+        item_t *end = p + size;
+        while (p != end)
+            buffer = unpack1<ORDER, item_t, buffer_t>(buffer, p++);
+        return buffer;
     }
 
     template<PackOrder ORDER, typename A, typename ...T>
     class pack_struct
     {
     public:
-        static constexpr ::LdH::size_t PACKED_SIZE = ::LdH::__private::packed_struct_size<A, T...>::SIZE;
+        static constexpr ::LdH::size_t PACKED_SIZE = pack_struct<ORDER, T...>::PACKED_SIZE + packed_size<A>;
 
         template<class buffer_t>
         static buffer_t pack(buffer_t buffer, A first_value, T... other_values) noexcept
         {
-            return ::LdH::pack_struct<ORDER, T...>::template pack<decltype(buffer + packed_size<A>)>(
-                    ::LdH::pack1<ORDER, A, buffer_t>(buffer, first_value),
+            return pack_struct<ORDER, T...>::template pack<buffer_t>(
+                    pack1<ORDER, A, buffer_t>(buffer, first_value),
                     other_values...
             );
         }
@@ -332,8 +358,8 @@ namespace LdH
         template<class buffer_t>
         static buffer_t unpack(buffer_t buffer, A *first_storage, T *... other_storages) noexcept
         {
-            return ::LdH::pack_struct<ORDER, T...>::template unpack<decltype(buffer + packed_size<A>)>(
-                    ::LdH::unpack1<ORDER, A, buffer_t>(buffer, first_storage),
+            return LdH::pack_struct<ORDER, T...>::template unpack<buffer_t>(
+                    LdH::unpack1<ORDER, A, buffer_t>(buffer, first_storage),
                     other_storages...
             );
         }
@@ -343,18 +369,18 @@ namespace LdH
     class pack_struct<ORDER, A>
     {
     public:
-        static constexpr ::LdH::size_t PACKED_SIZE = ::LdH::packed_size<A>;
+        static constexpr LdH::size_t PACKED_SIZE = packed_size<A>;
 
         template<class buffer_t>
         static buffer_t pack(buffer_t buffer, A value) noexcept
         {
-            return ::LdH::pack1<ORDER, A, buffer_t>(buffer, value);
+            return LdH::pack1<ORDER, A, buffer_t>(buffer, value);
         }
 
         template<class buffer_t>
         static buffer_t unpack(buffer_t buffer, A *storage) noexcept
         {
-            return ::LdH::unpack1<ORDER, A, buffer_t>(buffer, storage);
+            return LdH::unpack1<ORDER, A, buffer_t>(buffer, storage);
         }
     };
 }
