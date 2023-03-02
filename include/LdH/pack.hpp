@@ -1,7 +1,7 @@
 #ifndef LdH_PACK_HPP
 # define LdH_PACK_HPP
 
-#include "ccheck.hpp"
+#include "type_traits.hpp"
 #include "int.hpp"
 
 namespace LdH
