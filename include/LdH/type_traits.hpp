@@ -1,6 +1,8 @@
 #ifndef LdH_TYPE_TRAITS_HPP
 # define LdH_TYPE_TRAITS_HPP
 
+# include <type_traits>
+
 namespace LdH
 {
     namespace __private
@@ -20,6 +22,12 @@ namespace LdH
 
     template<typename A, typename B>
     constexpr bool is_same = ::LdH::__private::is_same<A, B>::VALUE;
+
+    template<typename T, typename first_variant, typename ...variants>
+    constexpr bool is_one_of = is_same<T, first_variant> || is_one_of<T, variants...>;
+
+    template<typename T, typename last_variant>
+    constexpr bool is_one_of<T, last_variant> = is_same<T, last_variant>;
 
     template<typename F>
     struct fun_info
@@ -99,6 +107,14 @@ namespace LdH
 
     template<typename T>
     constexpr bool is_rvalue_reference = __private::ref_helper<T>::is_rvalue_reference;
+
+    template<class T>
+    constexpr bool is_enum = std::is_enum<T>::value;
+
+    template<class T>
+    constexpr bool is_union = std::is_union<T>::value;
+
+    using std::declval;
 
 
 }
