@@ -5,23 +5,8 @@
 
 namespace LdH
 {
-    namespace __private
-    {
-        template<typename A, typename B>
-        struct is_same
-        {
-            static constexpr bool VALUE = false;
-        };
-
-        template<typename A>
-        struct is_same<A, A>
-        {
-            static constexpr bool VALUE = true;
-        };
-    }
-
     template<typename A, typename B>
-    constexpr bool is_same = ::LdH::__private::is_same<A, B>::VALUE;
+    constexpr bool is_same = std::is_same_v<A, B>;
 
     template<typename T, typename first_variant, typename ...variants>
     constexpr bool is_one_of = is_same<T, first_variant> || is_one_of<T, variants...>;
