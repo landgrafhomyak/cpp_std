@@ -10,7 +10,7 @@
 # include "int.hpp"
 # include "type_traits.hpp"
 
-namespace LdH
+namespace LdH::StructSerializer
 {
     enum class EntityType
     {
