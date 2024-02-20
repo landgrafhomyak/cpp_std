@@ -271,7 +271,7 @@ namespace LdH::StructSerializer
         static void _serialize(buffer_t buffer, UINT_T value, LdH::size_t offset) noexcept
         {
 
-            buffer[offset + pos] = (unsigned char) (value & 0xFFu);
+            buffer[offset + byte_size - pos - 1] = (unsigned char) (value & 0xFFu);
             if constexpr (pos > 0)
             {
                 _serialize<pos - 1, buffer_t>(buffer, value >> 8u, offset);
@@ -291,7 +291,7 @@ namespace LdH::StructSerializer
         {
             UINT_T value = (((UINT_T) (buffer[offset + pos])) & 0xFFu);
             if constexpr (pos > 0)
-                value |= _deserialize<pos - 1, buffer_t>(buffer, offset) << 8;
+                value = (value << 8) | _deserialize<pos - 1, buffer_t>(buffer, offset);
             return value;
         }
 
